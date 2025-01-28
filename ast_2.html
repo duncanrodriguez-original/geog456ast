@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>Assessment 2 Geog456</title>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""/>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <script src="./tropStormDanny.js" ></script>
+        <style>
+            body{
+                background-color: rgb(211, 140, 41);
+            }
+            h1{
+                color: rgb(87, 36, 6);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                justify-self: right;
+            }
+            #mapid{
+                width: 500px; height: 500px;
+                position: absolute;
+            }
+        </style>
+    </head>
+    <body>
+    <h1>Assessment 2 Tropical Storm Danny </h1> 
+    <div id="mapid"></div>
+    
+    <style>
+        #mapid{ width: 900px; height: 500px; }
+    </style>
+    <script>  
+    var map = L.map('mapid').setView([30.844,-76.444], 6);
+
+    
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+    
+    var hurIcon = L.icon({    
+        iconUrl:"./hurricane-icon",
+        iconSize: [30,30],
+        popupAnchor: [0,0]
+        });
+
+    var customPopup = "Tropical Storm Danny  <br/><img src='https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Danny_2021-06-28_1840Z.jpg/330px-Danny_2021-06-28_1840Z.jpg' width='100px'/>";
+
+
+    L.geoJSON(danny, {   
+    pointToLayer: function (feature, latlng) { 
+    return L.marker(latlng, {icon: hurIcon});}}) 
+    .bindPopup(customPopup) 
+    .addTo(map);
+    </script>
+    </body>
+</html>
